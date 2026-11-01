@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d20">
+<title>Soap Bubble Control Center</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;padding:28px 20px;
+ font-family:Arial,sans-serif;color:#fff;
+ background:
+ radial-gradient(ellipse at 15% 10%,#344b91 0,transparent 42%),
+ radial-gradient(ellipse at 90% 85%,#452b79 0,transparent 42%),
+ #080d20;
+}
+.header{display:flex;justify-content:space-between;align-items:center;margin:15px 0 30px}
+h1{font-size:25px;margin:0}
+.sub{color:#aebbdc;font-size:13px;margin-top:7px}
+.glass{
+ background:linear-gradient(135deg,rgba(255,255,255,.19),rgba(255,255,255,.045));
+ border:1px solid rgba(255,255,255,.22);
+ box-shadow:inset 0 1px 1px rgba(255,255,255,.2),0 12px 35px #0005;
+ backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+}
+.bubble{
+ width:48px;height:48px;border-radius:50%;
+ background:radial-gradient(circle at 30% 25%,#fff9,transparent 30%),
+ linear-gradient(135deg,#b9eaff88,#d4a7ff66);
+ border:1px solid #ffffff80;
+ box-shadow:inset -5px -6px 12px #8b7dff55,0 0 20px #83caff55;
+}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.tile{
+ min-height:112px;border-radius:25px;padding:18px;
+ display:flex;flex-direction:column;justify-content:space-between;
+ cursor:pointer;transition:.2s;
+}
+.tile:active{transform:scale(.96)}
+.tile.active{
+ background:linear-gradient(135deg,#a5ddff66,#a68bff55);
+ border-color:#d7efff99;
+}
+.symbol{font-size:25px}
+.tile span:last-child{font-size:14px;font-weight:bold}
+.section{font-size:16px;margin:30px 0 14px}
+.wide{grid-column:span 2;min-height:90px}
+.slider-card{border-radius:24px;padding:20px;margin-top:13px}
+.slider-head{display:flex;justify-content:space-between;margin-bottom:16px}
+input[type=range]{width:100%;accent-color:#b7e5ff}
+.footer{text-align:center;color:#9ba9ca;font-size:11px;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="header">
+ <div>
+  <h1>Control Center</h1>
+  <div class="sub">Soap Bubble Glass Experience</div>
+ </div>
+ <div class="bubble"></div>
+</div>
+
+<div class="grid">
+ <div class="tile glass active" onclick="toggle(this)">
+  <span class="symbol">◉</span><span>Wi-Fi</span>
+ </div>
+ <div class="tile glass active" onclick="toggle(this)">
+  <span class="symbol">ᛒ</span><span>Bluetooth</span>
+ </div>
+ <div class="tile glass" onclick="toggle(this)">
+  <span class="symbol">✈</span><span>Airplane mode</span>
+ </div>
+ <div class="tile glass" onclick="toggle(this)">
+  <span class="symbol">☾</span><span>Dark mode</span>
+ </div>
+ <div class="tile glass wide" onclick="toggle(this)">
+  <span class="symbol">⌁</span><span>Do not disturb</span>
+ </div>
+</div>
+
+<div class="section">Adjustments</div>
+<div class="slider-card glass">
+ <div class="slider-head"><span>☼ Brightness</span><span id="bv">75%</span></div>
+ <input type="range" min="0" max="100" value="75"
+ oninput="document.getElementById('bv').textContent=this.value+'%'">
+</div>
+<div class="slider-card glass">
+ <div class="slider-head"><span>♫ Volume</span><span id="vv">60%</span></div>
+ <input type="range" min="0" max="100" value="60"
+ oninput="document.getElementById('vv').textContent=this.value+'%'">
+</div>
+<div class="footer">Soap Bubble • Glass UI Prototype</div>
+
+<script>
+function toggle(el){el.classList.toggle('active')}
+</script>
+</body>
+</html>
