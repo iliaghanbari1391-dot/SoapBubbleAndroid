@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b20">
+<title>Soap Bubble Control Center</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 28px 20px;
+    font-family: Arial, sans-serif;
+    color: white;
+    background:
+        radial-gradient(ellipse at 15% 10%, #343b85 0%, transparent 42%),
+        radial-gradient(ellipse at 90% 70%, #174b72 0%, transparent 45%),
+        linear-gradient(145deg, #080b20, #15152f 55%, #071c30);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 4px 28px;
+}
+
+.header h1 {
+    font-size: 29px;
+    margin: 0;
+    font-weight: 700;
+}
+
+.header p {
+    color: #c5d1f4;
+    margin: 7px 0 0;
+    font-size: 14px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8deaff, #a88aff, #f5a8df);
+    box-shadow: 0 0 25px #8acfff66;
+}
+
+.section-title {
+    color: #cbd5f4;
+    font-size: 15px;
+    margin: 25px 5px 12px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+}
+
+.tile {
+    min-height: 125px;
+    padding: 18px;
+    border-radius: 27px;
+    border: 1px solid #ffffff35;
+    background: linear-gradient(
+        145deg,
+        #ffffff2a,
+        #ffffff0c 55%,
+        #8edfff12
+    );
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow:
+        inset 1px 1px 2px #ffffff35,
+        inset -1px -1px 2px #9ceaff18,
+        0 12px 30px #00000025;
+    transition: .2s;
+}
+
+.tile:active {
+    transform: scale(.96);
+}
+
+.tile.active {
+    background: linear-gradient(145deg, #9ceaff55, #a58bff35);
+    border-color: #b4eaff99;
+    box-shadow: 0 0 25px #7edbff30,
+                inset 1px 1px 3px #ffffff70;
+}
+
+.icon {
+    font-size: 27px;
+    margin-bottom: 13px;
+}
+
+.tile h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.tile p {
+    margin: 6px 0 0;
+    color: #c8d5ee;
+    font-size: 12px;
+}
+
+.panel {
+    padding: 20px;
+    margin-top: 14px;
+    border-radius: 27px;
+    border: 1px solid #ffffff30;
+    background: linear-gradient(135deg, #ffffff20, #ffffff08);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: inset 1px 1px 2px #ffffff30;
+}
+
+.slider-row {
+    margin: 12px 0 22px;
+}
+
+.slider-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    color: #e5eaff;
+    font-size: 14px;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: #a4eaff;
+    height: 5px;
+}
+
+.footer {
+    text-align: center;
+    margin: 35px 0 15px;
+    color: #9caed2;
+    font-size: 11px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div>
+        <h1>Control Center</h1>
+        <p>Soap Bubble Edition · Glass UI</p>
+    </div>
+    <div class="avatar"></div>
+</div>
+
+<div class="section-title">Connectivity</div>
+
+<div class="grid">
+    <div class="tile active" onclick="toggle(this)">
+        <div class="icon">◉</div>
+        <h3>Wi-Fi</h3>
+        <p>Demo control</p>
+    </div>
+
+    <div class="tile" onclick="toggle(this)">
+        <div class="icon">ᛒ</div>
+        <h3>Bluetooth</h3>
+        <p>Demo control</p>
+    </div>
+
+    <div class="tile" onclick="toggle(this)">
+        <div class="icon">✈</div>
+        <h3>Airplane Mode</h3>
+        <p>Demo control</p>
+    </div>
+
+    <div class="tile" onclick="toggle(this)">
+        <div class="icon">☾</div>
+        <h3>Dark Mode</h3>
+        <p>Demo control</p>
+    </div>
+</div>
+
+<div class="section-title">Adjustments</div>
+
+<div class="panel">
+    <div class="slider-row">
+        <div class="slider-label">
+            <span>☀ Brightness</span>
+            <span id="brightnessValue">75%</span>
+        </div>
+        <input type="range" min="0" max="100" value="75"
+        oninput="updateValue('brightnessValue',this.value)">
+    </div>
+
+    <div class="slider-row">
+        <div class="slider-label">
+            <span>♫ Volume</span>
+            <span id="volumeValue">60%</span>
+        </div>
+        <input type="range" min="0" max="100" value="60"
+        oninput="updateValue('volumeValue',this.value)">
+    </div>
+</div>
+
+<div class="footer">
+    SOAP BUBBLE · LIQUID GLASS EXPERIENCE
+    <br><br>
+    Standalone visual demo — system settings are not changed.
+</div>
+
+<script>
+function toggle(element) {
+    element.classList.toggle("active");
+}
+
+function updateValue(id, value) {
+    document.getElementById(id).textContent = value + "%";
+}
+</script>
+
+</body>
+</html>
